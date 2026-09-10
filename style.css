@@ -1,0 +1,1218 @@
+```css
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Infant:ital,wght@0,300..700;1,300..700&display=swap");
+
+/* ==================== TOKENS ==================== */
+
+:root {
+  --plum: #3A070C;
+  --mauve: #8B4A52;
+  --champagne: #C9A35F;
+  --ivory: #FAF3E8;
+  --lilac: #E8D6CE;
+  --lavender: #6F0B17;
+
+  --font-display: "Cormorant Infant", "Times New Roman", serif;
+  --font-body: "Vazirmatn", "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Allura", "Snell Roundhand", "Segoe Script", cursive;
+  --font-arabic: "Noto Naskh Arabic", "Geeza Pro", "Traditional Arabic", serif;
+}
+
+html[lang="fa"] body {
+  font-family: "Vazirmatn", var(--font-body);
+}
+
+/* ==================== FOUNDATION ==================== */
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--plum);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  background: var(--plum);
+  color: var(--plum);
+  direction: rtl;
+}
+
+/* ==================== INTRO LOCK ==================== */
+
+/*
+   قبل از پایان ویدیو:
+   - اسکرول ممنوع
+   - ارتفاع صفحه برابر با صفحه نمایش
+*/
+body.intro-locked {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+/*
+   بعد از پایان ویدیو:
+   اسکرول آزاد می‌شود
+*/
+body.intro-finished {
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ==================== BASIC ELEMENTS ==================== */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+.hero {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  overflow: clip;
+  background: var(--plum);
+}
+
+.section-shell {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.section-pad {
+  padding: 68px 0;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 650;
+  letter-spacing: .06em;
+  line-height: 1.2;
+  color: var(--mauve);
+}
+
+.section-heading {
+  margin: 0 auto 34px;
+  max-width: 680px;
+  text-align: center;
+}
+
+.section-heading h2,
+.welcome-copy h2,
+.venue-inner h2,
+.dress-copy h2,
+.gift-copy h2,
+.closing-section h2 {
+  margin: 13px 0 18px;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  color: var(--plum);
+  font-family: var(--font-script);
+  direction: ltr;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.ornament {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 auto;
+  width: 108px;
+}
+
+.ornament::before,
+.ornament::after {
+  content: "";
+  height: 1px;
+  width: 43px;
+  background: color-mix(in srgb, var(--champagne) 75%, transparent);
+}
+
+.ornament i {
+  border: 1px solid var(--champagne);
+  height: 7px;
+  transform: rotate(45deg);
+  width: 7px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity .9s cubic-bezier(.2,.75,.25,1),
+    transform .9s cubic-bezier(.2,.75,.25,1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==================== HERO ==================== */
+
+.hero {
+  align-items: center;
+  display: flex;
+  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  background: var(--plum);
+  color: var(--ivory);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.hero-video,
+.hero-veil {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+}
+
+.hero-video {
+  transform: scale(1.025);
+  transition:
+    filter 1.8s ease,
+    transform 8s ease;
+  z-index: -3;
+  background: var(--plum);
+}
+
+.is-open .hero-video {
+  transform: scale(1.08);
+}
+
+/* لایه روی ویدیو */
+.hero-veil {
+  z-index: -2;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,1,3,.55),
+      rgba(20,1,3,.15) 40%,
+      rgba(20,1,3,.65)
+    );
+}
+
+/* کادر تزئینی */
+.hero-geometry {
+  inset: 21px;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.hero-geometry::before,
+.hero-geometry::after {
+  border-style: solid;
+  content: "";
+  inset: 0;
+  position: absolute;
+  border-color: color-mix(in srgb, var(--champagne) 32%, transparent);
+}
+
+.hero-geometry::before {
+  border-width: 1px;
+  clip-path: polygon(
+    0 0,
+    35% 0,
+    35% 1px,
+    65% 1px,
+    65% 0,
+    100% 0,
+    100% 100%,
+    65% 100%,
+    65% calc(100% - 1px),
+    35% calc(100% - 1px),
+    35% 100%,
+    0 100%
+  );
+}
+
+.hero-geometry::after {
+  border-width: 0 1px;
+  inset: 12px 0;
+}
+
+/* ==================== OPENING MARK ==================== */
+
+.opening-mark {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  inset: 0;
+  justify-content: center;
+  opacity: 1;
+  position: absolute;
+  transition:
+    opacity .7s ease,
+    transform .9s ease,
+    visibility .7s;
+  visibility: visible;
+  z-index: 3;
+  color: var(--ivory);
+  text-align: center;
+  padding: 0 24px;
+}
+
+/*
+   وقتی کاربر شروع می‌کند:
+   نوشته لمس کردن ناپدید می‌شود.
+*/
+.hero.is-playing .opening-mark,
+.hero.is-finished .opening-mark,
+.is-open .opening-mark {
+  opacity: 0 !important;
+  transform: scale(.96);
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.opening-mono {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+  line-height: 1;
+  color: var(--ivory);
+  font-family: var(--font-script);
+  direction: ltr;
+  font-size: clamp(3rem, 11vw, 5rem);
+  font-weight: 400;
+}
+
+.opening-mono i {
+  height: 52px;
+  transform: rotate(28deg);
+  width: 1px;
+  background: color-mix(in srgb, var(--champagne) 70%, transparent);
+}
+
+.opening-tap {
+  font-size: .78rem;
+  font-weight: 650;
+  letter-spacing: .04em;
+  color: var(--champagne);
+  margin-top: 4px;
+}
+
+.opening-ripple {
+  border: 1px solid color-mix(in srgb, var(--champagne) 80%, transparent);
+  border-radius: 50%;
+  height: 31px;
+  margin-top: 6px;
+  position: relative;
+  width: 31px;
+}
+
+.opening-ripple::before,
+.opening-ripple::after {
+  border: 1px solid color-mix(in srgb, var(--champagne) 46%, transparent);
+  border-radius: inherit;
+  content: "";
+  inset: -1px;
+  position: absolute;
+  animation: pulse-ring 2.4s ease-out infinite;
+}
+
+.opening-ripple::after {
+  animation-delay: .8s;
+}
+
+/* ==================== MUSIC BUTTON ==================== */
+
+/*
+   قبل از پایان ویدیو مخفی است.
+*/
+.music-toggle {
+  align-items: center;
+  backdrop-filter: blur(7px);
+  border: 1px solid color-mix(in srgb, var(--champagne) 55%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  font-size: .68rem;
+  font-weight: 650;
+  gap: 8px;
+  padding: 10px 14px;
+  position: fixed;
+  left: 17px;
+  top: 17px;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    opacity .3s ease,
+    visibility .3s ease;
+  z-index: 50;
+  background: color-mix(in srgb, var(--plum) 68%, transparent);
+  color: var(--ivory);
+
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/*
+   فقط بعد از پایان کامل ویدیو نمایش داده می‌شود.
+*/
+body.intro-finished .music-toggle {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  outline: none;
+  background: color-mix(in srgb, var(--plum) 92%, transparent);
+  border-color: var(--champagne);
+}
+
+.music-bars {
+  align-items: center;
+  display: flex;
+  gap: 2px;
+  height: 15px;
+}
+
+.music-bars i {
+  background: currentColor;
+  border-radius: 2px;
+  display: block;
+  height: 5px;
+  opacity: .8;
+  width: 2px;
+}
+
+.music-toggle.is-playing .music-bars i {
+  animation: music-bar .8s ease-in-out infinite alternate;
+}
+
+.music-toggle.is-playing .music-bars i:nth-child(2) {
+  animation-delay: -.45s;
+}
+
+.music-toggle.is-playing .music-bars i:nth-child(3) {
+  animation-delay: -.25s;
+}
+
+/* ==================== HERO CONTENT ==================== */
+
+/*
+   این بخش بسیار مهم است.
+
+   محتوای دعوتنامه تا وقتی کلاس is-finished
+   روی Hero نیامده باشد، کاملاً مخفی می‌ماند.
+
+   !important عمداً استفاده شده تا CSS قدیمی
+   مثل .hero.is-open .hero-content نتواند آن را
+   زودتر نمایش دهد.
+*/
+.hero .hero-content {
+  margin: auto;
+  max-width: 860px;
+  padding: 118px 24px 90px;
+  text-align: center;
+  width: 100%;
+  color: var(--ivory);
+  text-shadow:
+    0 1px 3px rgba(30,0,3,.9),
+    0 4px 20px rgba(30,0,3,.65);
+
+  opacity: 0 !important;
+  transform: translateY(28px);
+  visibility: hidden !important;
+  pointer-events: none !important;
+  animation: none !important;
+
+  line-height: 1.5;
+}
+
+/*
+   فقط بعد از اینکه ویدیو به 100% رسید:
+   متن دعوتنامه ظاهر می‌شود.
+*/
+.hero.is-finished .hero-content {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+
+  animation:
+    hero-content-reveal
+    1.4s
+    cubic-bezier(.16,.75,.25,1)
+    both !important;
+}
+
+.bismillah {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 42px 0 6px;
+  opacity: .92;
+}
+
+.hero-divider {
+  align-items: center;
+  display: flex;
+  gap: 13px;
+  justify-content: center;
+  margin: 14px auto;
+}
+
+.hero-divider::before,
+.hero-divider::after {
+  content: "";
+  height: 1px;
+  width: 34px;
+  background: color-mix(in srgb, var(--champagne) 70%, transparent);
+}
+
+.hero-divider span {
+  font-size: .68rem;
+  color: var(--champagne);
+}
+
+.hero-welcome {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  margin: 0 0 20px;
+  line-height: 1.6;
+  opacity: .85;
+}
+
+.couple-names {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+.couple-names h1 {
+  margin: 0 0 5px;
+  text-wrap: balance;
+  font-family: var(--font-script);
+  direction: ltr;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  line-height: 1;
+}
+
+.name-ampersand {
+  line-height: 1;
+  color: var(--champagne);
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-style: italic;
+}
+
+.hero-invitation {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 22px auto 6px;
+  max-width: 520px;
+}
+
+.hero-closing {
+  font-size: .8rem;
+  font-weight: 600;
+  margin: 6px 0 0;
+  opacity: .85;
+}
+
+.scroll-cue {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 55px auto 0;
+  text-decoration: none;
+  width: fit-content;
+  color: var(--ivory);
+}
+
+.scroll-cue span {
+  font-size: .62rem;
+  font-weight: 650;
+}
+
+.scroll-cue i {
+  height: 27px;
+  overflow: hidden;
+  position: relative;
+  width: 1px;
+  background: color-mix(in srgb, var(--champagne) 55%, transparent);
+}
+
+.scroll-cue i::after {
+  animation: scroll-line 2s ease-in-out infinite;
+  content: "";
+  height: 10px;
+  left: 0;
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  background: var(--champagne);
+}
+
+/* ==================== WELCOME ==================== */
+
+.welcome-section {
+  background:
+    radial-gradient(
+      circle at 85% 25%,
+      color-mix(in srgb, var(--lilac) 30%, transparent),
+      transparent 29%
+    ),
+    var(--ivory);
+}
+
+.welcome-shell {
+  align-items: center;
+  display: grid;
+  gap: 40px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.arch-emblem {
+  align-items: center;
+  aspect-ratio: .78;
+  border: 1px solid color-mix(in srgb, var(--plum) 20%, transparent);
+  border-radius: 50% 50% 5px 5px / 34% 34% 5px 5px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 260px;
+  position: relative;
+  width: 76%;
+  background: #DFC7A9;
+}
+
+.arch-emblem::before {
+  border: 1px solid color-mix(in srgb, var(--champagne) 82%, transparent);
+  border-radius: inherit;
+  content: "";
+  inset: 12px;
+  position: absolute;
+}
+
+.arch-emblem span {
+  font-family: var(--font-arabic);
+  font-size: 3.6rem;
+  position: relative;
+  z-index: 2;
+  color: var(--plum);
+}
+
+.welcome-copy {
+  text-align: center;
+}
+
+.welcome-copy p {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.9;
+  margin: 0 auto;
+  max-width: 340px;
+  color: color-mix(in srgb, var(--plum) 78%, var(--ivory));
+}
+
+.signature,
+.closing-names {
+  color: var(--mauve);
+  margin-top: 26px;
+  font-family: var(--font-script);
+  direction: ltr;
+  font-size: clamp(2.1rem, 6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* ==================== DATE REVEAL / SCRATCH ==================== */
+
+.scratch-section {
+  background: #E7D3B8;
+}
+
+.scratch-wrap {
+  aspect-ratio: 1.5;
+  border: 1px solid color-mix(in srgb, var(--champagne) 45%, transparent);
+  margin: 0 auto;
+  max-width: 560px;
+  overflow: hidden;
+  position: relative;
+  background: var(--ivory);
+  box-shadow:
+    0 18px 50px
+    color-mix(in srgb, var(--plum) 12%, transparent);
+  z-index: 1;
+  width: 100%;
+}
+
+.date-reveal {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  inset: 0;
+  justify-content: center;
+  padding: 40px 25px;
+  position: absolute;
+  text-align: center;
+  color: var(--plum);
+}
+
+.date-reveal > * {
+  position: relative;
+  z-index: 1;
+}
+
+.date-kicker {
+  font-size: .72rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: var(--mauve);
+  font-family: var(--font-body);
+}
+
+.date-main {
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 10px;
+}
+
+.date-day {
+  color: var(--plum);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 0 0 8px;
+  opacity: .8;
+}
+
+.date-time {
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.scratch-canvas {
+  cursor: grab;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  touch-action: none;
+  transition:
+    opacity .7s ease,
+    transform .8s ease;
+  width: 100%;
+  z-index: 3;
+}
+
+.scratch-wrap.is-revealed {
+  animation:
+    date-celebrate
+    .85s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+.scratch-note {
+  font-family: var(--font-display);
+  font-size: .95rem;
+  font-style: italic;
+  margin: 20px auto 0;
+  text-align: center;
+  color: var(--lavender);
+}
+
+.scratch-hint {
+  font-family: var(--font-body);
+  font-size: .78rem;
+  color: var(--mauve);
+  text-align: center;
+  margin: 14px auto 0;
+  opacity: .85;
+}
+
+/* ==================== PROGRAM / TIMELINE ==================== */
+
+.program-section {
+  background:
+    color-mix(in srgb, var(--lilac) 32%, var(--ivory));
+}
+
+.program-section .section-heading {
+  margin-bottom: 28px;
+}
+
+.timeline {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  right: 104px;
+  width: 1px;
+  background:
+    color-mix(in srgb, var(--champagne) 65%, transparent);
+}
+
+.timeline article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 82px;
+  column-gap: 40px;
+  padding: 20px 0;
+}
+
+.timeline article::before {
+  content: "";
+  position: absolute;
+  right: 104px;
+  top: 24px;
+  width: 9px;
+  height: 9px;
+  background: var(--champagne);
+  border:
+    3px solid
+    color-mix(in srgb, var(--lilac) 32%, var(--ivory));
+  border-radius: 50%;
+  transform: translateX(50%);
+  z-index: 2;
+}
+
+.timeline time {
+  grid-column: 2;
+  padding-top: 5px;
+  color: var(--mauve);
+  font-family: var(--font-body);
+  font-size: .68rem;
+  font-weight: 600;
+  text-align: left;
+  direction: ltr;
+}
+
+.timeline h3 {
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1;
+  margin: 0 0 8px;
+}
+
+.timeline p {
+  color:
+    color-mix(in srgb, var(--plum) 60%, var(--ivory));
+  font-family: var(--font-display);
+  font-size: .85rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ==================== VENUE ==================== */
+
+.venue-section {
+  padding-left: 20px;
+  padding-right: 20px;
+  background: var(--ivory);
+}
+
+.venue-card {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 30px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      color-mix(in srgb, var(--mauve) 18%, transparent),
+      transparent 42%
+    ),
+    var(--plum);
+  color: var(--ivory);
+  border:
+    1px solid
+    color-mix(in srgb, var(--champagne) 55%, transparent);
+  box-shadow:
+    0 28px 70px
+    color-mix(in srgb, var(--plum) 16%, transparent);
+}
+
+.venue-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border:
+    1px solid
+    color-mix(in srgb, var(--champagne) 24%, transparent);
+  pointer-events: none;
+}
+
+.venue-card .eyebrow {
+  position: relative;
+  z-index: 1;
+  color: var(--champagne);
+}
+
+.venue-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto 26px;
+  color: var(--champagne);
+}
+
+.venue-divider::before,
+.venue-divider::after {
+  content: "";
+  width: 44px;
+  height: 1px;
+  background:
+    color-mix(in srgb, var(--champagne) 60%, transparent);
+}
+
+.venue-card h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--ivory);
+  font-family: var(--font-script);
+  direction: ltr;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.venue-card p {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  margin: 22px auto 30px;
+  color:
+    color-mix(in srgb, var(--ivory) 70%, transparent);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.venue-map-button {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 28px;
+  border: 1px solid var(--champagne);
+  color: var(--ivory);
+  font-size: .72rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease;
+}
+
+.venue-map-button:hover {
+  background: var(--champagne);
+  color: var(--plum);
+  transform: translateY(-2px);
+}
+
+/* ==================== CLOSING ==================== */
+
+.closing-section {
+  align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 20px 0;
+  position: relative;
+  background:
+    radial-gradient(circle at center, #faf3e8 40%, #ffecc9);
+  color: var(--plum);
+}
+
+.closing-arch {
+  align-items: center;
+  border:
+    1px solid
+    color-mix(in srgb, var(--plum) 22%, transparent);
+  border-bottom: 0;
+  border-radius:
+    50% 50% 0 0 /
+    28% 28% 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 620px;
+  padding: 74px 27px 55px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
+}
+
+.closing-arch::before {
+  border:
+    1px solid
+    color-mix(in srgb, var(--plum) 27%, transparent);
+  border-bottom: 0;
+  border-radius: inherit;
+  content: "";
+  inset: 13px 13px 0;
+  position: absolute;
+}
+
+.closing-arch > * {
+  position: relative;
+  z-index: 1;
+}
+
+.closing-arch .bismillah {
+  direction: rtl;
+  font-size: clamp(1.3rem, 4.5vw, 1.9rem);
+  max-width: 520px;
+  color: var(--plum);
+}
+
+.closing-arch > p:not(.bismillah) {
+  font-family: var(--font-display);
+  font-size: .92rem;
+  font-style: italic;
+  line-height: 1.7;
+  margin: 12px auto;
+  max-width: 460px;
+  opacity: .72;
+}
+
+.closing-section h2 {
+  margin-top: 26px;
+  color: var(--lavender);
+  font-size: clamp(2.3rem, 9vw, 3.2rem);
+}
+
+.closing-names {
+  margin-top: 10px;
+  color: var(--mauve);
+}
+
+.closing-arch small {
+  font-size: .68rem;
+  font-weight: 650;
+  margin-top: 22px;
+  opacity: .9;
+  color: var(--champagne);
+}
+
+/* ==================== SELECTION / FOCUS ==================== */
+
+::selection {
+  background: var(--mauve);
+  color: var(--ivory);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--champagne);
+  outline-offset: 3px;
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes hero-content-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) scale(.985);
+    filter: blur(5px);
+  }
+
+  60% {
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes pulse-ring {
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.05);
+  }
+}
+
+@keyframes music-bar {
+  to {
+    height: 15px;
+  }
+}
+
+@keyframes scroll-line {
+  to {
+    transform: translateY(38px);
+  }
+}
+
+@keyframes date-celebrate {
+  40% {
+    box-shadow:
+      0 28px 90px
+      color-mix(in srgb, var(--mauve) 30%, transparent);
+    transform: scale(1.02);
+  }
+}
+
+/* ==================== DESKTOP ==================== */
+
+@media (min-width: 700px) {
+
+  .section-pad {
+    padding: 90px 0;
+  }
+
+  .section-shell {
+    width: min(1120px, calc(100% - 80px));
+  }
+
+  .hero-content {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+
+  .timeline article {
+    grid-template-columns: 1fr 115px;
+    column-gap: 50px;
+    padding: 27px 0;
+  }
+
+  .timeline::before {
+    right: 125px;
+  }
+
+  .timeline article::before {
+    right: 125px;
+  }
+}
+
+/* ==================== REDUCED MOTION ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+     حتی در reduced-motion هم محتوا
+     قبل از پایان ویدیو نباید نمایش داده شود.
+  */
+  .hero .hero-content {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    animation: none !important;
+  }
+
+  .hero.is-finished .hero-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* ==================== MOBILE ==================== */
+
+@media (max-width: 600px) {
+
+  .section-shell {
+    width: min(100% - 34px, 1120px);
+  }
+
+  .music-toggle {
+    left: 12px;
+    top: 12px;
+  }
+
+  .hero-content {
+    padding-top: 90px;
+    padding-bottom: 70px;
+  }
+
+  .hero-geometry {
+    inset: 14px;
+  }
+}
+```
